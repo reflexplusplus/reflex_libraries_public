@@ -1,0 +1,11 @@
+<resources output="../resources.cpp">
+
+	<NSA>
+
+		<file id="kUserAccountTerms" path="user-account-terms.txt" compress="true"/>
+		
+		<file id="kOfflineActivationInstructions" path="instructions.txt" compress="true"/>
+		
+	</NSA>
+
+</resources>

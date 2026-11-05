@@ -1,0 +1,63 @@
+#h1 User Account Terms & Conditions
+
+#p A User Account is required to store and manage your licences for your New Sonic Arts products.
+
+#p An account is created automatically when you purchase a product from us.  You may also create one manually.
+
+#p We never share any data from your user account with any 3rd parties.
+
+
+#h2 1. What data is stored?
+
+
+#h3 1.1. Basic Account Information
+
+<ul>
+    #p Your name
+    #p Your email address
+    #p A hash of your password
+    #p Your country (used for localisation)
+	#p A timestamp of the account creation date and your last login (used to identify dead accounts)
+</ul>
+
+#h3 1.2. Licences and Activation Data
+
+#p The licence keys for any purchased products are stored with your account.
+
+#p When you activate a licence (by entering your licence code in the in-app Activation Dialog), we also store the following information:
+
+<ul>
+	#p A numeric identifier generated to represent your machine
+	#p A numeric identifier generated from your IP address
+</ul>
+
+#p While you are permitted to install and activate on multiple machines (for example your desktop and laptop), this data is required by our copy protection scheme to identify abuse, such as sharing of licence codes with other users.
+
+
+#h3 1.3. Purchase Data
+
+#p The time, date, currency and value of any purchases made are stored with your account.  This is used for financial accounting purposes, but may also be used to calculate customised pricing on upgrades and special offers.
+
+
+#h3 1.4. Notification Preferences
+
+#p In the User Area, you can choose whether you wish to receive product update and news emails from us.
+#p By default, notifications are enabled.  By accepting these terms you agree to receive such email notifications.
+
+#h3 1.5. Additional Data
+
+#p If you participate in the Feature Ballot Box, this data is also stored on our servers and associated with your User Area account.
+
+
+#h2 2. In-App Cloud Services
+
+#p You may optionally login to your User Account from our apps to access cloud-based features such as Auto-Activation, the PatchCloud preset browser and access to evaluation/beta-features.
+#p The usage of such cloud-services is strictly optional.  In-app login is not required for general usage.
+#p The use of beta/evaluation features is optional and strictly at your own risk, and without technical support.
+
+
+#h2 3. Account Deletion
+
+#p If you account does not hold any licences/serials, you can delete your account and all associated data by clicking Delete Account in the User Area.
+
+#p If your account contains licences and you wish to delete them, please contact us.

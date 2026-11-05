@@ -1,0 +1,36 @@
+/ext/
+/temp/
+/scripts/__pycache__/
+/reflex_libraries-nsa-stable/
+
+# Windows
+desktop.ini
+
+# Visual Studio
+.vs/
+build.log
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+
+# Xcode
+*.DS_Store
+xcuserdata/
+Intermediates.noindex/
+DerivedData/
+*.a
+*.aar
+*.pdb
+*.lib
+
+# --- Others ---
+.vscode/
+*.ignore
+
+# Reflex
+**/*.cache

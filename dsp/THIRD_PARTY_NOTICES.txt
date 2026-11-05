@@ -1,0 +1,19 @@
+THIRD PARTY NOTICES
+
+This repository includes a modified copy of PFFFT, which is based on FFTPACK v4/v5.
+
+PFFFT / FFTPACK attribution:
+- Copyright (c) 2013 Julien Pommier (pommier@modartt.com)
+- Based on original Fortran 77 code from FFTPACK v4 from NETLIB, authored by Dr. Paul Swarztrauber of NCAR, 1985.
+- FFTPACK v5 license applies to FFTPACK v4 sources.
+
+License summary:
+- Redistribution and use in source and binary forms, with or without modification, are permitted subject to the conditions in the upstream FFTPACK license.
+- The names of NCAR, UCAR, and related contributors must not be used to endorse or promote derived products without prior written permission.
+- Redistributions of source code and binary form must retain the upstream copyright notice, conditions, and disclaimer.
+
+Upstream notice retained in:
+- `src/dsp/core/fft/ext/pffft/pffft.cpp`
+- `src/dsp/core/fft/ext/pffft/pffft.h`
+
+This file is a repository-level acknowledgement only. The upstream license text embedded in the PFFFT sources remains authoritative for the bundled implementation.
