@@ -38,6 +38,9 @@
 
 REFLEX_NS(ULM)
 
+constexpr UInt32 kVersion = 1;	//for static lib integrity
+
+
 REFLEX_DECLARE_KEY32(ProductInfo);
 
 REFLEX_DECLARE_KEY32(vendor);
