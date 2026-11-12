@@ -8,7 +8,7 @@
 //
 //Secondary API
 
-namespace Reflex::Bootstrap
+namespace ULM
 {
 
 	class WindowHandle;
@@ -30,11 +30,11 @@ namespace Reflex::Bootstrap
 //
 //WindowHandle
 
-class Reflex::Bootstrap::WindowHandle : public Object
+class ULM::WindowHandle : public Object
 {
 public:
 
-	REFLEX_OBJECT(Bootstrap::WindowHandle, Object);
+	REFLEX_OBJECT(ULM::WindowHandle, Object);
 
 	
 	
@@ -67,7 +67,7 @@ protected:
 
 	struct LayoutPersistence;
 
-	static UInt8 MakeStyleFlags(bool closeable) { return System::kWindowStyleFrame | System::kWindowStyleResizable | (closeable ? 0 : System::kWindowStyleCloseable); }
+	static UInt8 MakeStyleFlags(GLX::Object & content, bool closeable) { return System::kWindowStyleFrame | System::kWindowStyleResizable | (closeable ? 0 : System::kWindowStyleCloseable); }
 
 
 	Reference <System::Window> m_window;

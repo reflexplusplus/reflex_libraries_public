@@ -6,7 +6,7 @@
 //
 //impl
 
-struct Reflex::Bootstrap::WindowHandle::LayoutPersistence : public Object
+struct ULM::WindowHandle::LayoutPersistence : public Object
 {
 	LayoutPersistence(WindowHandle & handle, File::PersistentPropertySet & prefs, ArrayView <Key32> path)
 		: handle(handle)
@@ -49,8 +49,8 @@ struct Reflex::Bootstrap::WindowHandle::LayoutPersistence : public Object
 	Key32 m_id;
 };
 
-Reflex::Bootstrap::WindowHandle::WindowHandle(const WString::View & title, bool top_most, WillRetain <GLX::Object> content, const Function <void()> & on_close)
-	: m_window(System::Window::Create(MakeStyleFlags(True(on_close)), top_most)),
+ULM::WindowHandle::WindowHandle(const WString::View & title, bool top_most, WillRetain <GLX::Object> content, const Function <void()> & on_close)
+	: m_window(System::Window::Create(MakeStyleFlags(content, True(on_close)), top_most)),
 	m_window_client(New<GLX::WindowClient>(false)),
 	m_content(content),
 	m_initialized(false)
@@ -65,14 +65,14 @@ Reflex::Bootstrap::WindowHandle::WindowHandle(const WString::View & title, bool 
 	}
 }
 
-void Reflex::Bootstrap::WindowHandle::EnableLayoutPersistence(File::PersistentPropertySet & prefs, ArrayView <Key32> path)
+void ULM::WindowHandle::EnableLayoutPersistence(File::PersistentPropertySet & prefs, ArrayView <Key32> path)
 {
 	REFLEX_ASSERT(path);	//clients responsiblity
 
 	m_persistence = REFLEX_CREATE(LayoutPersistence, *this, prefs, path);
 }
 
-void Reflex::Bootstrap::WindowHandle::Show(GLX::Alignment position, bool allow_animations)
+void ULM::WindowHandle::Show(GLX::Alignment position, bool allow_animations)
 {
 	m_clock = GLX::CreateAnimationClock([this, position, allow_animations](Float)
 	{
@@ -96,7 +96,7 @@ void Reflex::Bootstrap::WindowHandle::Show(GLX::Alignment position, bool allow_a
 				{
 					Data::Deserialize(binary, rect);
 
-					rect = Detail::ConstrainRectToDisplay(rect, content_size);
+					rect = Bootstrap::Detail::ConstrainRectToDisplay(rect, content_size);
 				}
 			}
 
@@ -115,14 +115,14 @@ void Reflex::Bootstrap::WindowHandle::Show(GLX::Alignment position, bool allow_a
 	});
 }
 
-void Reflex::Bootstrap::WindowHandle::Hide()
+void ULM::WindowHandle::Hide()
 {
 	m_clock.Clear();
 
 	m_window->SetDisplayMode(System::kWindowDisplayMinimised); 
 }
 
-Reflex::AlreadyRetained <Reflex::Bootstrap::WindowHandle> Reflex::Bootstrap::ShowDialogWindow(GLX::Object & owner, const WString::View & title, WillRetain <GLX::Object> content, Key32 id)
+Reflex::AlreadyRetained <ULM::WindowHandle> ULM::ShowDialogWindow(GLX::Object & owner, const WString::View & title, WillRetain <GLX::Object> content, Key32 id)
 {
 	auto window_handle = REFLEX_CREATE(WindowHandle, title, true, content, [&owner, id]()
 	{
@@ -136,12 +136,12 @@ Reflex::AlreadyRetained <Reflex::Bootstrap::WindowHandle> Reflex::Bootstrap::Sho
 	return window_handle;
 }
 
-void Reflex::Bootstrap::CloseDialogWindow(GLX::Object & owner, Key32 id)
+void ULM::CloseDialogWindow(GLX::Object & owner, Key32 id)
 {
 	owner.UnsetProperty<WindowHandle>(id);
 }
 
-Reflex::Bootstrap::WindowHandle * Reflex::Bootstrap::QueryDialogWindow(GLX::Object & owner, Key32 id)
+ULM::WindowHandle * ULM::QueryDialogWindow(GLX::Object & owner, Key32 id)
 {
 	return owner.QueryProperty<WindowHandle>(id);
 }

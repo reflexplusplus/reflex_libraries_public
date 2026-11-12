@@ -47,7 +47,7 @@ public:
 
 	//content
 	
-	virtual void Init(Access access, Module & module, WillRetain <Allocation> allocation);
+	[[deprecated("use Populate + Attach")]] void Init(Access access, Module & module, WillRetain <Allocation> allocation);
 
 	virtual void Populate(Access access, WillRetain <Allocation> allocation);
 
@@ -254,6 +254,13 @@ public:
 inline Unretained <Netx::ParameterSet> Netx::ParameterSet::Create(Key32 id)
 {
 	return REFLEX_CREATE(ParameterSet, id);
+}
+
+inline void Netx::ParameterSet::Init(Access access, Module & module, WillRetain <Allocation> allocation)
+{
+	Populate(access, allocation);
+
+	Component::Attach(access, module);
 }
 
 REFLEX_INLINE void Netx::ParameterSet::SetProperties(Access access, UInt idx, ConstWillRetain <PropertyDef> info)

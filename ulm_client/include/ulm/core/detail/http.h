@@ -26,7 +26,7 @@ REFLEX_DECLARE_KEY32(data);
 
 Unretained <System::HttpConnection> CreateHttpRequest(bool https, const CString::View & server);
 
-System::HttpConnection::Response Open(System::HttpConnection & http, const CString::View & resource, Array < Pair <CString> > && headers, const Data::Archive::View & post, const Function <bool(UInt, const Data::Archive::View&)> & onprogress, UInt start = 0, UInt length = kMaxUInt32);
+bool Open(System::HttpConnection & http, const CString::View & resource, Array < Pair <CString> > && headers, const Data::Archive::View & post, const Function <bool(UInt, const Data::Archive::View&)> & onprogress, UInt start = 0, UInt length = kMaxUInt32);
 
 REFLEX_END
 

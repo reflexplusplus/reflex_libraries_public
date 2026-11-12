@@ -108,6 +108,8 @@ void ULM::AddLoginFlow(GLX::FlowDialog & wizard, Key32 ondone_page, decltype (&L
 
 		scroller->SetContent(CreateMarkupViewer(File::Extract(kUserAccountTerms)));
 
+		Detail::SetCascadingStyleId(*scroller->GetContent(), K32("content"));
+
 		Detail::SetCascadingStyleId(GLX::AddInline(page, scroller), K32("scroller"));
 
 		GLX::EnableInline<true>(scroller);
@@ -231,9 +233,11 @@ AlreadyRetained <GLX::FlowDialog> ULM::AcquireLoginDialog(GLX::Object & owner, c
 {
 	auto wizard = New<GLX::FlowDialog>(kLoginPageTitle);
 
+	Data::SetBool(wizard, GLX::kresizable, true);
+
 	AddLoginFlow(wizard, kNullKey, loginfn);
 
-	wizard->SetProperty(kNullKey, CreateLoginListener([wizard]()
+	SetAbstractProperty(wizard, kNullKey, CreateLoginListener([wizard]()
 	{
 		if (GetUserID())
 		{
@@ -247,7 +251,7 @@ AlreadyRetained <GLX::FlowDialog> ULM::AcquireLoginDialog(GLX::Object & owner, c
 
 	wizard->ShowPage(Detail::kLogin);
 
-	Bootstrap::ShowDialogWindow(owner, kLoginPageTitle, wizard);
+	ShowDialogWindow(owner, kLoginPageTitle, wizard);
 
 	return wizard;
 }

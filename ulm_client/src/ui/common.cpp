@@ -48,7 +48,7 @@ REFLEX_NOINLINE AlreadyRetained <GLX::FlowDialog> ULM::AcquireProductWizard(GLX:
 {
 	auto product_id = product.GetID();
 
-	if (auto window = Bootstrap::QueryDialogWindow(owner, product_id))
+	if (auto window = QueryDialogWindow(owner, product_id))
 	{
 		auto wizard = Cast<GLX::FlowDialog>(window->GetContent());
 
@@ -58,6 +58,8 @@ REFLEX_NOINLINE AlreadyRetained <GLX::FlowDialog> ULM::AcquireProductWizard(GLX:
 	}
 
 	auto wizard = New<GLX::FlowDialog>(title);
+
+	Data::SetBool(wizard, GLX::kresizable, true);
 
 	wizard->footer->GetLast()->SetState(GLX::kSelectedState);
 
@@ -73,7 +75,7 @@ REFLEX_NOINLINE AlreadyRetained <GLX::FlowDialog> ULM::AcquireProductWizard(GLX:
 		}
 	}));
 
-	Bootstrap::ShowDialogWindow(owner, title, wizard, product_id);
+	ShowDialogWindow(owner, title, wizard, product_id);
 
 	return wizard;
 }
