@@ -174,7 +174,7 @@ private:
 	friend class Module;
 
 
-	void OnGetAddress(Data::Archive & address) const override final;
+	bool OnQueryAddress(Data::Archive & address) const override final;
 
 	void OnComplete(bool recorded, bool redo) override final;
 

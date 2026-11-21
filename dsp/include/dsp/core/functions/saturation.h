@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../detail/constants.h"
+#include "logic.h"
 
 
 

@@ -103,7 +103,7 @@ private:
 	friend class Component;
 
 		
-	void OnGetAddress(Data::Archive & address) const override final;
+	bool OnQueryAddress(Data::Archive & address) const override final;
 
 	void OnStore(Data::Archive & stream) const override final;
 

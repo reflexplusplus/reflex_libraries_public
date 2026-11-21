@@ -2,6 +2,7 @@
 
 #include "../detail/constants.h"
 #include "../functions/interpolate.h"
+#include "../functions/logic.h"
 
 
 
@@ -409,7 +410,9 @@ REFLEX_INLINE void DSP::SamplePlayerV4::Stop(UInt vidx)
 
 REFLEX_INLINE FloatV4 DSP::SamplePlayerV4::ToSingle(const System::Float64x2 * sse)
 {
-	return Shuffle<0,1,0,1,Float>(REFLEX_F64_X2_TO_F32_X4(sse[0]), REFLEX_F64_X2_TO_F32_X4(sse[1]));
+	FloatV4 lower(REFLEX_F64_X2_TO_F32_X4(sse[0]));
+	FloatV4 upper(REFLEX_F64_X2_TO_F32_X4(sse[1]));
+	return Shuffle<0,1,0,1>(lower, upper);
 }
 
 REFLEX_INLINE void DSP::SamplePlayerV4::WriteDouble(System::Float64x2 * sse, const FloatV4 & value)

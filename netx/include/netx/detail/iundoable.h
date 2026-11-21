@@ -36,8 +36,7 @@ protected:
 
 
 	struct TransactionScope;
-
-	
+		
 	struct UndoRedoState : public Object
 	{
 		UndoRedoState(Data::Archive && address, Key32 action, const Data::Archive::View & param)
@@ -66,8 +65,7 @@ protected:
 	{
 		UInt16 nscope = 0;
 		UInt16 nstateaction = 0;
-	} 
-	
+	}
 	counts;
 
 	Records * m_records = nullptr;
@@ -103,7 +101,7 @@ protected:
 	}
 
 	
-	virtual void OnGetAddress(Data::Archive & address) const = 0;
+	virtual bool OnQueryAddress(Data::Archive & address) const = 0;
 
 	virtual void OnStore(Data::Archive & stream) const = 0;
 
@@ -126,8 +124,6 @@ private:
 	friend class Netx::Network;
 
 	friend struct iHistory;
-
-
 
 	struct NullHistory : public iHistory
 	{
@@ -169,9 +165,6 @@ public:
 
 	const bool state_action;	//true if entire state change
 
-	const bool active;
-
-
 
 private:
 
@@ -181,6 +174,8 @@ private:
 
 	void StoreUndoRedo(iHistory::UndoRedoState & state, bool redo);
 
+
+	bool m_active;
 
 	iHistory::UndoRedoState * m_state = nullptr;
 };

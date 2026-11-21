@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../functions/convert.h"
+#include "../functions/logic.h"
 #include "detail/dnc.h"
 
 

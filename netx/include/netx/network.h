@@ -100,7 +100,7 @@ private:
 
 	friend class Module;
 
-	friend class Netx::Component;
+	friend class Component;
 
 	Network(const Network & module);
 
@@ -111,5 +111,4 @@ private:
 
 
 	Reference <Object> m_autorefreshclock;
-
 };

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "[require].h"
+#include "functions/logic.h"
 
 
 
@@ -40,51 +40,20 @@ template <class TYPE> Stereo <TYPE> Max(const Stereo <TYPE> & a, const Stereo <T
 template <class TYPE> Stereo <TYPE> Min(const Stereo <TYPE> & a, const Stereo <TYPE> & b);
 
 
-template <class TYPE> TYPE Select(bool test, const TYPE & t, const TYPE & f)
-{
-	return test ? t : f;
-}
-
-template <class TYPE> TYPE Select(bool test, const TYPE & t)
-{
-	return test ? t : TYPE();
-}
-
-template <class TYPE> TYPE Select(bool test, const SIMD::TypeV4 <TYPE> & t, const SIMD::TypeV4 <TYPE> & f)
-{
-	return SIMD::Select(test, t, f);
-}
-
-template <class TYPE> TYPE Select(bool test, const SIMD::TypeV4 <TYPE> & t)
-{
-	return SIMD::Select(test, t);
-}
-
-template <class TYPE> Stereo < SIMD::TypeV4 <TYPE> > Select(const SIMD::BoolV4 & test, const Stereo < SIMD::TypeV4 <TYPE> > & t)
-{
-	return { Select(test, t.l), Select(test, t.r) };
-}
-
-template <class TYPE> Stereo < SIMD::TypeV4 <TYPE> > Select(const SIMD::BoolV4 & test, const Stereo < SIMD::TypeV4 <TYPE> > & t, const Stereo < SIMD::TypeV4 <TYPE> > & f)
-{ 
-	return { Select(test, t.l, f.l), Select(test, t.r, f.r) };
-}
-
-template <class TYPE> Stereo <TYPE> Select(bool test, const Stereo <TYPE> & t)
-{
-	return { Select(test, t.l), Select(test, t.r) };
-}
-
-template <class TYPE> Stereo <TYPE> Select(const SIMD::BoolV4 & test, const Stereo <TYPE> & t, const Stereo <TYPE> & f)
-{
-	return { Select(test, t.l, f.l), Select(test, t.r, f.r) };
-}
-
 template <class TYPE> TYPE Abs(const TYPE & a) { return Reflex::Abs(a); }
 
 template <class TYPE> TYPE Max(const TYPE & a, const TYPE & b) { return Reflex::Max(a, b); }
 
 template <class TYPE> TYPE Min(const TYPE & a, const TYPE & b) { return Reflex::Min(a, b); }
+
+
+template <class TYPE> Stereo < TypeV4 <TYPE> > Select(const BoolV4 & test, const Stereo < TypeV4 <TYPE> > & t);
+
+template <class TYPE> Stereo < TypeV4 <TYPE> > Select(const BoolV4 & test, const Stereo < TypeV4 <TYPE> > & t, const Stereo < TypeV4 <TYPE> > & f);
+
+template <class TYPE> Stereo <TYPE> Select(bool test, const Stereo <TYPE> & t);
+
+template <class TYPE> Stereo <TYPE> Select(const BoolV4 & test, const Stereo <TYPE> & t, const Stereo <TYPE> & f);
 
 REFLEX_END
 
@@ -371,4 +340,24 @@ template <class TYPE> REFLEX_INLINE DSP::Stereo <TYPE> DSP::Max(const Stereo <TY
 template <class TYPE> REFLEX_INLINE DSP::Stereo <TYPE> DSP::Min(const Stereo <TYPE> & a, const Stereo <TYPE> & b)
 {
 	return Stereo<TYPE>(Min(a.l, b.l), Min(a.r, b.r));
+}
+
+template <class TYPE> DSP::Stereo < TypeV4 <TYPE> > DSP::Select(const BoolV4 & test, const Stereo < TypeV4 <TYPE> > & t)
+{
+	return { Select(test, t.l), Select(test, t.r) };
+}
+
+template <class TYPE> DSP::Stereo < TypeV4 <TYPE> > DSP::Select(const BoolV4 & test, const Stereo < TypeV4 <TYPE> > & t, const Stereo < TypeV4 <TYPE> > & f)
+{
+	return { Select(test, t.l, f.l), Select(test, t.r, f.r) };
+}
+
+template <class TYPE> DSP::Stereo <TYPE> DSP::Select(bool test, const Stereo <TYPE> & t)
+{
+	return { Select(test, t.l), Select(test, t.r) };
+}
+
+template <class TYPE> DSP::Stereo <TYPE> DSP::Select(const BoolV4 & test, const Stereo <TYPE> & t, const Stereo <TYPE> & f)
+{
+	return { Select(test, t.l, f.l), Select(test, t.r, f.r) };
 }
