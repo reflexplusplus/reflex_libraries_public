@@ -237,7 +237,7 @@ public:
 
 	virtual void OnGateOff(UInt buffer_position, const Event & event, UInt64 client_data, EventStream & output) {}
 
-	virtual void OnClock(UInt buffer_position, UInt songpos, const Event & event, EventStream & output) { }
+	virtual void OnClock(UInt buffer_position, Float32 bps, UInt songpos, const Event & event, EventStream & output) { }
 
 
 	const UInt8 flags;
