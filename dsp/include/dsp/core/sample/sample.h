@@ -57,7 +57,7 @@ public:
 
 	//setup
 
-	static void RegisterFormat(const WString::View & ext, Loader loader, UInt32 magicbytes = 0);
+	static void RegisterFormat(WString::View ext, Loader loader, UInt32 magicbytes = 0);
 
 	static Array <WString::View> GetFormats();
 
@@ -67,15 +67,10 @@ public:
 
 	//lifetime
 
-	static ConstAlreadyRetained <Sample> Retrieve(File::ResourcePool::Lock & lock, const WString::View & path);	//from ResourcePool, retain it to keep it alive beyong the snapshot
+	static ConstAlreadyRetained <Sample> Retrieve(File::ResourcePool::Lock & lock, WString::View path);	//from ResourcePool, retain it to keep it alive beyong the snapshot
 	
-	static Sample * Create(Float sr, UInt nchn, UInt length, Key32 id, ArrayView <MetaDataItem> metadata, File::Attributes::Status status = File::Attributes::kStatusReady, Allocator & allocator = g_default_allocator);
+	static Sample * Create(Key32 id, Float sr, UInt nchn, UInt length, ArrayView <MetaDataItem> metadata = {}, File::Attributes::Status status = File::Attributes::kStatusReady, Allocator & allocator = g_default_allocator);
 
-	static Sample * Create(Float sr, UInt nchn, UInt length, Key32 id = kNullKey, File::Attributes::Status status = File::Attributes::kStatusReady, Allocator & allocator = g_default_allocator)
-	{
-		return Create(sr, nchn, length, id, {}, status, allocator);
-	}
-	
 	~Sample();
 
 
@@ -123,7 +118,7 @@ protected:
 	
 	Sample();
 
-	Sample(Float sr, UInt nchn, UInt length, Key32 id, ArrayView <MetaDataItem> metadata, File::Attributes::Status status);
+	Sample(Key32 id, Float sr, UInt nchn, UInt length, ArrayView <MetaDataItem> metadata, File::Attributes::Status status);
 
 	
 	bool m_debug_set;
@@ -140,7 +135,7 @@ protected:
 //
 //impl
 
-REFLEX_INLINE ConstAlreadyRetained <DSP::Sample> DSP::Sample::Retrieve(File::ResourcePool::Lock & lock, const WString::View & path)
+REFLEX_INLINE ConstAlreadyRetained <DSP::Sample> DSP::Sample::Retrieve(File::ResourcePool::Lock & lock, WString::View path)
 {
 	REFLEX_ASSERT(module.IsInitialised());
 

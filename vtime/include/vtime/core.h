@@ -55,36 +55,30 @@ namespace VTime
 //
 //Analysis
 
-struct VTime::Analysis : public Object
+struct VTime::Analysis : public Async::Task
 {
-	REFLEX_OBJECT(VTime::Analysis, Object);
+	REFLEX_OBJECT(VTime::Analysis, Async::Task);
 
 	static Analysis & null;
 
-
-
-	//lifetime
-
-	[[nodiscard]] static Unretained <Analysis> Create(const ArrayView <const Float*> & channels, UInt length, Float32 sr, const Data::PropertySet & properties = REFLEX_NULL(Data::PropertySet));		//sample must exist in memory for duration of lifetime
-
-	
-
-	//progress
-	
-	virtual const Tuple <bool,Float> & GetProgress() const = 0;
-
-	virtual void Cancel() = 0;
-
-
-	
-	//info
-	
 	struct Transient
 	{
 		Float fmin, fmax;
 
 		Float delta;
 	};
+
+
+
+	//lifetime
+
+	[[nodiscard]] static Unretained <Analysis> Create(ArrayView <const Float*> channels, UInt length, Float32 sr, const Data::PropertySet & properties = Data::PropertySet::null);		//sample must exist in memory for duration of lifetime
+
+	
+
+	//info
+	
+	virtual const AtomicFloat32 & GetProgressDirect() const = 0;
 
 	virtual void GetTransients(UInt channel, Sequence <Float64,Transient> & values) const {}
 };
@@ -127,7 +121,7 @@ struct VTime::Player : public Object
 	
 	virtual void ClearSample() = 0;
 
-	virtual void SetSample(WillRetain <Analysis> analysis) = 0;
+	virtual void SetSample(ConstWillRetain <Analysis> analysis) = 0;
 
 	virtual ConstAlreadyRetained <Analysis> GetSample() const = 0;
 

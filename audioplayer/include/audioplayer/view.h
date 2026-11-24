@@ -28,16 +28,24 @@ public:
 
 	REFLEX_OBJECT(PatternView, Netx::Detail::ComponentView);
 
-	enum TimingLock : UInt8
+	struct SourceTiming
 	{
-		kLockBpm,
-		kLockBeats,
+		Float32 bpm = 0.0f;
+		Pair <UInt> region = {};
 	};
 
+	struct Host
+	{
+		// Returns a finite, positive source BPM.
+		Function <SourceTiming(const DSP::Sample &)> read_timing;
+		Function <void(const DSP::Sample &, const SourceTiming &)> store_timing;
+		Function <Float64()> get_track_bps;
+		Function <void(UInt32)> seek;
+	};
 
 	// lifetime
 
-	[[nodiscard]] static TRef <PatternView> Create(AudioPlayer & player);
+	[[nodiscard]] static Unretained <PatternView> Create(AudioPlayer & player, Host host);
 
 
 	virtual void SetPattern(Key32 id) = 0;
@@ -51,17 +59,15 @@ public:
 
 	virtual bool IsTrimEnabled() const = 0;
 
-	virtual void SetTimingLock(TimingLock lock) = 0;
-
-	virtual TimingLock GetTimingLock() const = 0;
-
 	// Region-relative source sample position, supplied by the owner.
 	virtual void SetPlayPosition(Float64 position) = 0;
 
-	virtual TRef <DSP::SampleDisplay> GetSampleDisplay() = 0;
+	virtual AlreadyRetained <DSP::SampleDisplay> GetSampleDisplay() = 0;
+	
+	virtual AlreadyRetained <GLX::Object> GetHeaderClientArea() = 0;
 
 
-	const TRef <AudioPlayer> player;
+	const AlreadyRetained <AudioPlayer> player;
 
 
 protected:
