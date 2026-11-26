@@ -12,6 +12,8 @@ REFLEX_NS(DSP)
 
 void RegisterNullSample(File::ResourcePool::Lock & lock);
 
+void PurgeSamples(File::ResourcePool::Lock & lock);
+
 extern const Reflex::Detail::Module & module;
 
 REFLEX_END
